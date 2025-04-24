@@ -9,7 +9,7 @@ public class MenuCiclo {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\n=== Menú de Ciclos ===");
+            System.out.println("\n=== Menu de Ciclos ===");
             System.out.println("1. Crear ciclo");
             System.out.println("2. Listar ciclos");
             System.out.println("3. Buscar ciclo por ID");
@@ -18,7 +18,7 @@ public class MenuCiclo {
             System.out.println("6. Eliminar ciclo");
             System.out.println("7. Volver");
 
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Seleccione una opcion: ");
             int opcion = scanner.nextInt();
             scanner.nextLine(); // Limpiar el buffer
 
@@ -44,7 +44,7 @@ public class MenuCiclo {
                 case 7:
                     return;
                 default:
-                    System.out.println("❌ Opción inválida.");
+                    System.out.println("Opcion invalida.");
             }
         }
     }

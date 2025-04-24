@@ -112,4 +112,17 @@ public class CicloController {
                     ", ID Carrera: " + c.getIdCarrera());
         });
     }
+    
+    
+    public static void listarCiclosPorAnio() {
+    System.out.print("Ingrese el año para filtrar los ciclos: ");
+    int anio = scanner.nextInt();
+    scanner.nextLine();  // Limpiar el buffer
+
+    CicloDAO.listarCiclosPorAnio(anio).forEach(c -> {
+        System.out.println("ID: " + c.getIdCiclo() +
+                ", Año: " + c.getAnio());
+    });
+}
+
 }

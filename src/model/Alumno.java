@@ -11,7 +11,6 @@ public class Alumno {
     private Date fechaNacimiento;
     private Date fechaRegistro;
 
-    public Alumno() {}
 
     public Alumno(int idPersona, Date fechaNacimiento, Date fechaRegistro) {
         this.idPersona = idPersona;

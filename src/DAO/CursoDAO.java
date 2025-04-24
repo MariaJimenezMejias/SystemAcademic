@@ -112,4 +112,70 @@ public class CursoDAO {
             return false;
         }
     }
+public static List<Curso> obtenerCursosPorCarrera(String nombreCarrera) {
+    String sql = "SELECT c.idCurso, c.nombre, c.creditos, c.horasSemanales " +
+                 "FROM Curso c " +
+                 "JOIN Ciclo ci ON c.idCiclo = ci.idCiclo " +
+                 "JOIN Carrera ca ON ci.idCarrera = ca.idCarrera " +
+                 "WHERE LOWER(ca.nombreCarrera) = LOWER(?)";  // Usamos LOWER() para hacer la comparación insensible a mayúsculas
+
+    List<Curso> cursos = new ArrayList<>();
+    try (Connection conn = dbConnection.getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+        // Establece el valor del parámetro en la consulta (nombreCarrera)
+        pstmt.setString(1, nombreCarrera.toLowerCase());  // Convertimos el nombre de la carrera a minúsculas
+
+        // Ejecuta la consulta y procesa los resultados
+        try (ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                Curso curso = new Curso(
+                    rs.getInt("idCurso"),            // idCurso de la tabla Curso
+                    rs.getString("nombre"),          // nombre del curso
+                    rs.getInt("creditos"),           // creditos del curso
+                    rs.getInt("horasSemanales"),     // horasSemanales del curso
+                    -1  // Como no estamos utilizando el idCiclo aquí, pasamos un valor negativo
+                );
+                cursos.add(curso);
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al obtener cursos por carrera: " + e.getMessage());
+    }
+    return cursos;
+}
+
+public static List<Curso> obtenerCursosPorNombre(String nombreCurso) {
+    String sql = "SELECT c.idCurso, c.nombre, c.creditos, c.horasSemanales " +
+                 "FROM Curso c " +
+                 "WHERE LOWER(c.nombre) LIKE LOWER(?)";  // Usamos LOWER() para hacer la comparación insensible a mayúsculas
+
+    List<Curso> cursos = new ArrayList<>();
+    try (Connection conn = dbConnection.getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+        // Establece el valor del parámetro en la consulta (nombreCurso)
+        pstmt.setString(1, "%" + nombreCurso.toLowerCase() + "%");  // El signo '%' permite la búsqueda parcial (por nombre similar)
+
+        // Ejecuta la consulta y procesa los resultados
+        try (ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                Curso curso = new Curso(
+                    rs.getInt("idCurso"),            // idCurso de la tabla Curso
+                    rs.getString("nombre"),          // nombre del curso
+                    rs.getInt("creditos"),           // creditos del curso
+                    rs.getInt("horasSemanales"),     // horasSemanales del curso
+                    -1  // No se necesita idCiclo en este caso
+                );
+                cursos.add(curso);
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al obtener cursos por nombre: " + e.getMessage());
+    }
+    return cursos;
+}
+
+
+
 }

@@ -1,20 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
-/**
- *
- * @author maria
- */
-
 import DAO.profesorDAO;
-import model.Profesor;
-
-
-
-import DAO.profesorDAO;
+import model.Usuario1;
 import model.Profesor;
 import java.util.List;
 import java.util.Scanner;
@@ -32,26 +19,28 @@ public class ProfesorController {
         System.out.print("Ingrese el departamento: ");
         profesor.setDepartamento(scanner.nextLine());
 
-        System.out.print("Ingrese la cédula del profesor: ");
+        System.out.print("Ingrese la cedula del profesor: ");
         profesor.setCedula(scanner.nextLine());
 
         new profesorDAO().insertarProfesor(profesor);
     }
 
     public static void mostrarProfesores() {
-        List<Profesor> profesores = new profesorDAO().listarProfesores();
+        List<Usuario1> profesores = new profesorDAO().listarProfesores();
 
         if (profesores.isEmpty()) {
-            System.out.println("📭 No hay profesores registrados.");
+            System.out.println("No hay profesores registrados.");
             return;
         }
 
-        System.out.println("\n📋 Lista de Profesores:");
-        for (Profesor p : profesores) {
-            System.out.println("ID: " + p.getIdUsuario());
-            System.out.println("Nombre: " + p.getNombre());
+        System.out.println("\nLista de Profesores:");
+        for (Usuario1 p : profesores) {
+            System.out.println("ID: " + p.getIdPersona());
+            System.out.println("Nombre: " + p.getNombreProfesor());
+            System.out.println("Cedula: " + p.getCedula());
+            System.out.println("Correo: " + p.getCorreo());
+            System.out.println("Telefono: " + p.getTelefono());
             System.out.println("Departamento: " + p.getDepartamento());
-            System.out.println("Cédula: " + p.getCedula());
             System.out.println("--------------------------");
         }
     }
@@ -63,5 +52,56 @@ public class ProfesorController {
 
         new profesorDAO().eliminarProfesor(id);
     }
-}
 
+    public static void buscarProfesorPorCedula() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la cedula del profesor: ");
+        String cedula = scanner.nextLine();
+
+        profesorDAO dao = new profesorDAO();
+        try {
+            List<Usuario1> profesores = dao.buscarProfesorPorCedula(cedula);
+            if (profesores.isEmpty()) {
+                System.out.println("No se encontro ningun profesor con esa cedula.");
+            } else {
+                for (Usuario1 profesor : profesores) {
+                    System.out.println("ID: " + profesor.getIdPersona());
+                    System.out.println("Nombre: " + profesor.getNombreProfesor());
+                    System.out.println("Cedula: " + profesor.getCedula());
+                    System.out.println("Correo: " + profesor.getCorreo());
+                    System.out.println("Telefono: " + profesor.getTelefono());
+                    System.out.println("Departamento: " + profesor.getDepartamento());
+                    System.out.println("--------------------------");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al buscar profesor: " + e.getMessage());
+        }
+    }
+
+    public static void buscarProfesorPorNombre() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el nombre del profesor: ");
+        String nombre = scanner.nextLine();
+
+        profesorDAO dao = new profesorDAO();
+        try {
+            List<Usuario1> profesores = dao.buscarProfesorPorNombre(nombre);
+            if (profesores.isEmpty()) {
+                System.out.println("No se encontro ningun profesor con ese nombre.");
+            } else {
+                for (Usuario1 profesor : profesores) {
+                    System.out.println("ID: " + profesor.getIdPersona());
+                    System.out.println("Nombre: " + profesor.getNombreProfesor());
+                    System.out.println("Cedula: " + profesor.getCedula());
+                    System.out.println("Correo: " + profesor.getCorreo());
+                    System.out.println("Telefono: " + profesor.getTelefono());
+                    System.out.println("Departamento: " + profesor.getDepartamento());
+                    System.out.println("--------------------------");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al buscar profesor: " + e.getMessage());
+        }
+    }
+}

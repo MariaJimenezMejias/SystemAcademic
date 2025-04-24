@@ -19,10 +19,10 @@ public class alumnoDAO {
             pstmt.setDate(3, alumno.getFechaRegistro());
 
             pstmt.executeUpdate();
-            System.out.println("✅ Alumno insertado correctamente.");
+            System.out.println("Alumno insertado correctamente.");
             return true;
         } catch (SQLException e) {
-            System.out.println("❌ Error al insertar el alumno: " + e.getMessage());
+            System.out.println("Error al insertar el alumno: " + e.getMessage());
             return false;
         }
     }
@@ -43,7 +43,7 @@ public class alumnoDAO {
                 return -1;
             }
         } catch (SQLException e) {
-            System.out.println("❌ Error al obtener el ID del alumno: " + e.getMessage());
+            System.out.println("Error al obtener el ID del alumno: " + e.getMessage());
             return -1;
         }
     }
@@ -62,7 +62,7 @@ public class alumnoDAO {
             pstmt.setString(1, "%" + nombre + "%");
             return pstmt.executeQuery();
         } catch (SQLException e) {
-            System.out.println("❌ Error al buscar por nombre: " + e.getMessage());
+            System.out.println("Error al buscar por nombre: " + e.getMessage());
             return null;
         }
     }
@@ -81,7 +81,7 @@ public class alumnoDAO {
             pstmt.setString(1, cedula);
             return pstmt.executeQuery();
         } catch (SQLException e) {
-            System.out.println("❌ Error al buscar por cédula: " + e.getMessage());
+            System.out.println("Error al buscar por cedula: " + e.getMessage());
             return null;
         }
     }
@@ -100,7 +100,7 @@ public class alumnoDAO {
             pstmt.setString(1, "%" + carrera + "%");
             return pstmt.executeQuery();
         } catch (SQLException e) {
-            System.out.println("❌ Error al buscar por carrera: " + e.getMessage());
+            System.out.println("Error al buscar por carrera: " + e.getMessage());
             return null;
         }
     }

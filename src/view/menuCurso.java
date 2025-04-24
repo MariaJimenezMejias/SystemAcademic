@@ -18,9 +18,12 @@ public class menuCurso {
             System.out.println("3. Obtener curso por ID");
             System.out.println("4. Actualizar curso");
             System.out.println("5. Eliminar curso");
-            System.out.println("6. Volver");
+            System.out.println("6. Listar cursos por carrera");
+            System.out.println("7. Obtener curso por ID de curso");
+            System.out.println("8. Listar cursos por nombre");
+            System.out.println("9. Volver al menu principal");
 
-            System.out.print("Elija una opcion: ");
+            System.out.print("Seleccione una opcion: ");
             int opcion = scanner.nextInt();
             scanner.nextLine();  // Limpiar buffer
 
@@ -28,7 +31,7 @@ public class menuCurso {
                 case 1:
                     System.out.print("Nombre del curso: ");
                     String nombre = scanner.nextLine();
-                    System.out.print("Creditos: ");
+                    System.out.print("Créditos: ");
                     int creditos = scanner.nextInt();
                     System.out.print("Horas semanales: ");
                     int horas = scanner.nextInt();
@@ -51,7 +54,7 @@ public class menuCurso {
                         for (Curso curso : cursos) {
                             System.out.println("ID: " + curso.getIdCurso() +
                                                " | Nombre: " + curso.getNombre() +
-                                               " | Creditos: " + curso.getCreditos() +
+                                               " | Créditos: " + curso.getCreditos() +
                                                " | Horas: " + curso.getHorasSemanales() +
                                                " | ID Ciclo: " + curso.getIdCiclo());
                         }
@@ -66,7 +69,7 @@ public class menuCurso {
                         System.out.println("Curso encontrado:");
                         System.out.println("ID: " + encontrado.getIdCurso());
                         System.out.println("Nombre: " + encontrado.getNombre());
-                        System.out.println("Creditos: " + encontrado.getCreditos());
+                        System.out.println("Créditos: " + encontrado.getCreditos());
                         System.out.println("Horas: " + encontrado.getHorasSemanales());
                         System.out.println("ID Ciclo: " + encontrado.getIdCiclo());
                     } else {
@@ -80,7 +83,7 @@ public class menuCurso {
                     scanner.nextLine(); // limpiar buffer
                     System.out.print("Nuevo nombre: ");
                     String nuevoNombre = scanner.nextLine();
-                    System.out.print("Nuevos creditos: ");
+                    System.out.print("Nuevos créditos: ");
                     int nuevosCreditos = scanner.nextInt();
                     System.out.print("Nuevas horas semanales: ");
                     int nuevasHoras = scanner.nextInt();
@@ -107,7 +110,27 @@ public class menuCurso {
                     break;
 
                 case 6:
+                    System.out.println("Listar cursos por carrera");
+                    System.out.print("Escriba el nombre de la carrera: ");
+                    String nombreCarrera = scanner.nextLine();  // Capturamos el nombre de la carrera
+                    controller.listarCursosPorCarrera(nombreCarrera);  // Llamamos al controlador para listar los cursos de la carrera
+                    break;
+
+                case 7:
+                    System.out.print("Ingrese el ID del curso: ");
+                    int idCursoBusqueda = scanner.nextInt();  // Capturamos el ID del curso
+                    controller.listarCursosPorIdCurso(idCursoBusqueda);  // Llamamos al controlador para listar el curso por ID
+                    break;
+
+                case 8:
+                    System.out.print("Ingrese el nombre del curso: ");
+                    String nombreCursoBusqueda = scanner.nextLine();  // Capturamos el nombre del curso
+                    controller.listarCursosPorNombre(nombreCursoBusqueda);  // Llamamos al controlador para listar los cursos por nombre
+                    break;
+
+                case 9:
                     System.out.println("Volviendo al menu principal...");
+                    
                     return;
 
                 default:

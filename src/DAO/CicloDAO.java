@@ -143,4 +143,40 @@ public class CicloDAO {
 
         return ciclos;
     }
+    
+    
+    public static ArrayList<Ciclo> listarCiclosPorAnio(int anio) {
+    ArrayList<Ciclo> ciclos = new ArrayList<>();
+    String sql = """
+        SELECT c.idCiclo, c.anio, ca.nombreCarrera 
+        FROM Ciclo c
+        JOIN Carrera ca ON c.idCarrera = ca.idCarrera
+        WHERE c.anio = ?;
+    """;
+
+    try (Connection conn = dbConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, anio);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Ciclo c = new Ciclo();
+            c.setIdCiclo(rs.getInt("idCiclo"));
+            c.setAnio(rs.getInt("anio"));
+            String carreraNombre = rs.getString("nombreCarrera");
+            // Aquí se supone que el ciclo tiene un atributo de carrera
+            // Si no, podrías agregar uno o simplemente imprimir el nombre
+            System.out.println("Ciclo ID: " + c.getIdCiclo() +
+                    ", Año: " + c.getAnio() +
+                    ", Carrera: " + carreraNombre);
+            ciclos.add(c);
+        }
+    } catch (SQLException e) {
+        System.out.println("❌ Error al listar ciclos por año: " + e.getMessage());
+    }
+
+    return ciclos;
+}
+
 }

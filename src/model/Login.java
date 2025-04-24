@@ -11,104 +11,61 @@ public class Login {
 
     // Método para autenticar al usuario en la base de datos
     public static boolean autenticarUsuario(String correo, String clave) {
-        String sqlPersona = "SELECT idPersona FROM Persona WHERE correo = ?";
-
-        try (Connection conn = dbConnection.getConnection();
-             PreparedStatement pstmtPersona = conn.prepareStatement(sqlPersona)) {
-
-            pstmtPersona.setString(1, correo);
-            ResultSet rsPersona = pstmtPersona.executeQuery();
-
-            if (rsPersona.next()) {
-                int idPersona = rsPersona.getInt("idPersona");
-
-                // Consultamos idUsuario, clave y tipo
-                return verificarUsuario(conn, idPersona, clave);
-
-            } else {
-                System.out.println("❌ Correo no encontrado en la base de datos.");
-                return false;
-            }
-
+        try (Connection conn = dbConnection.getConnection()) {
+            return verificarUsuario(conn, correo, clave);
         } catch (SQLException e) {
-            System.out.println("❌ Error al autenticar el usuario: " + e.getMessage());
+            System.out.println("Error al autenticar el usuario: " + e.getMessage());
             return false;
         }
     }
 
-    // Método para verificar la clave del usuario
-    private static boolean verificarUsuario(Connection conn, int idPersona, String clave) throws SQLException {
-        String sqlUsuario = "SELECT idUsuario, clave, tipo FROM Usuario WHERE idPersona = ?";
-
-        try (PreparedStatement pstmtUsuario = conn.prepareStatement(sqlUsuario)) {
-            pstmtUsuario.setInt(1, idPersona);
-            ResultSet rsUsuario = pstmtUsuario.executeQuery();
-
-            if (rsUsuario.next()) {
-                String claveGuardada = rsUsuario.getString("clave");
-
-                // Aquí deberías usar un hash de la clave (bcrypt, etc.) para la comparación
-                if (clave.equals(claveGuardada)) {
-                    LoginController.tipoUsuario = rsUsuario.getString("tipo");
-                    LoginController.idUsuario = rsUsuario.getInt("idUsuario");
-
-                    // Recuperar el ID relacionado según el tipo de usuario
-                    return obtenerIdRelacionado(conn, idPersona, LoginController.tipoUsuario);
-
-                } else {
-                    System.out.println("❌ Clave incorrecta.");
-                    return false;
-                }
-            } else {
-                System.out.println("❌ No se encontró el usuario asociado al correo.");
-                return false;
-            }
-        }
-    }
-
-    // Método para recuperar el ID relacionado dependiendo del tipo de usuario
-    private static boolean obtenerIdRelacionado(Connection conn, int idPersona, String tipoUsuario) throws SQLException {
-        String tabla = "";
-        String campo = "";
-
-        // Selección de la tabla y campo según el tipo de usuario
-        switch (tipoUsuario.toLowerCase()) {
-            case "matriculador":
-                tabla = "Matriculador";
-                campo = "idMatriculador";
-                break;
-            case "profesor":
-                tabla = "Profesor";
-                campo = "idProfesor";
-                break;
-            case "alumno":
-                tabla = "Alumno";
-                campo = "idPersona"; // En este caso usamos idPersona directamente
-                LoginController.idRelacionado = idPersona; // Para alumnos, idPersona es el mismo
-                return true;
-            case "admin":
-                // Para admins, solo usamos el idUsuario ya que es específico para este tipo
-                LoginController.idRelacionado = LoginController.idUsuario;
-                return true;
-            default:
-                System.out.println("❌ Tipo de usuario no reconocido.");
-                return false;
-        }
-
-        // Realizamos la consulta para obtener el ID correspondiente
-        String sql = "SELECT " + campo + " FROM " + tabla + " WHERE idPersona = ?";
+    // Método para verificar el usuario y clave usando el correo
+    private static boolean verificarUsuario(Connection conn, String correo, String clave) throws SQLException {
+        String sql = "SELECT u.idUsuario, u.clave, u.tipo, u.idPersona " +
+                     "FROM Usuario u " +
+                     "JOIN Persona p ON u.idPersona = p.idPersona " +
+                     "WHERE p.correo = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, idPersona);
+            pstmt.setString(1, correo);
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                int idRelacionado = rs.getInt(campo);
-                LoginController.idRelacionado = idRelacionado;
-                System.out.println("✅ ID recuperado de " + tabla + ": " + idRelacionado);
-                return true;
+                String claveGuardada = rs.getString("clave");
+
+                // Imprimir para depuración
+                System.out.println("Correo encontrado: " + correo);
+                System.out.println("Clave proporcionada: " + clave);
+                System.out.println("Clave guardada: " + claveGuardada);
+
+                if (clave.equals(claveGuardada)) {
+                    // Asignamos tipo, idUsuario y procesamos idPersona si es alumno o profesor
+                    LoginController.tipoUsuario = rs.getString("tipo").trim().toLowerCase();
+                    LoginController.idUsuario = rs.getInt("idUsuario");
+                    int idPersona = rs.getInt("idPersona");
+
+                    // Imprimir tipo de usuario para depuración
+                    System.out.println("Tipo de usuario: " + LoginController.tipoUsuario);
+
+                    // Si el tipo es "alumno", asignamos idPersona a idRelacionado
+                    if (LoginController.tipoUsuario.equals("alumno")) {
+                        LoginController.idRelacionado = idPersona;
+                        System.out.println("ID relacionado asignado al alumno: " + idPersona);
+                    }
+
+                    // Si el tipo es "profesor", asignamos idUsuario a idRelacionado
+                    if (LoginController.tipoUsuario.equals("profesor")) {
+                        LoginController.idRelacionado = LoginController.idUsuario;
+                        System.out.println("ID relacionado asignado al profesor: " + LoginController.idUsuario);
+                    }
+
+                    return true;
+                } else {
+                    System.out.println("Clave incorrecta.");
+                    return false;
+                }
             } else {
-                System.out.println("⚠️ No se encontró el ID relacionado en la tabla " + tabla);
+                System.out.println("No se encontró un usuario con ese correo.");
                 return false;
             }
         }

@@ -7,7 +7,6 @@ import model.Grupo;
 import java.util.Scanner;
 
 public class GrupoController {
-
     public static void crearGrupo() {
         Scanner scanner = new Scanner(System.in);
         Grupo grupo = new Grupo();

@@ -19,11 +19,11 @@ public class dbConnection {
                     + "trustServerCertificate=true";
 
             conn = DriverManager.getConnection(connectionUrl);
-            System.out.println("✅ Conexión exitosa con autenticación de Windows.");
+            System.out.println();
         } catch (ClassNotFoundException e) {
-            System.out.println("❌ Driver no encontrado: " + e.getMessage());
+            System.out.println("Driver no encontrado: " + e.getMessage());
         } catch (SQLException e) {
-            System.out.println("❌ Error al conectar: " + e.getMessage());
+            System.out.println("Error al conectar: " + e.getMessage());
         }
 
         return conn;

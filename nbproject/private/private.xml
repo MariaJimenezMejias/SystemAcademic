@@ -18,7 +18,6 @@
             <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/CicloDAO.java</file>
             <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/CursoDAO.java</file>
             <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/GrupoDAO.java</file>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/MatriculaCarreraDAO.java</file>
             <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/MatriculaDAO.java</file>
             <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/administradorDAO.java</file>
             <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/alumnoDAO.java</file>
@@ -48,6 +47,19 @@
             <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/UsuarioView.java</file>
             <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/systemacademic/SystemAcademic.java</file>
             <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/MenuUsuario.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/NotasController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/NotaDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Nota.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/MenuNotas.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/HistorialAdminDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/HistorialAdminController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/MenuAdmin.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Persona.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/PersonaDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/PersonaController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/MenuPersona.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/Historial.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/MenuAlumno.java</file>
         </group>
     </open-files>
 </project-private>

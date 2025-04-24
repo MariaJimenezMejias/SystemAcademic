@@ -27,25 +27,29 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    public int insertarUsuario() throws SQLException {
-        String sqlUsuario = "INSERT INTO Usuario (idPersona, clave, tipo) VALUES (?, ?, ?)";
-        try (Connection conn = dbConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sqlUsuario, PreparedStatement.RETURN_GENERATED_KEYS)) {
+public int insertarUsuario() throws SQLException {
+    String sqlUsuario = "INSERT INTO Usuario (idPersona, clave, tipo) VALUES (?, ?, ?)";
+    try (Connection conn = dbConnection.getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sqlUsuario, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            pstmt.setInt(1, idPersona);
-            pstmt.setString(2, clave);
-            pstmt.setString(3, tipo);
+        pstmt.setInt(1, idPersona);
+        pstmt.setString(2, clave);
+        pstmt.setString(3, tipo);
 
-            pstmt.executeUpdate();
+        pstmt.executeUpdate();
 
-            try (ResultSet rs = pstmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    return rs.getInt(1); // Obtener el idUsuario generado
-                } else {
-                    return -1;
-                }
+        try (ResultSet rs = pstmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                int idGenerado = rs.getInt(1);
+                System.out.println("ID de usuario generado: " + idGenerado); // 👈 Aquí imprimís
+                return idGenerado;
+            } else {
+                System.out.println("No se pudo obtener el ID generado.");
+                return -1;
             }
         }
     }
+}
+
 }
 

@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import DB.dbConnection;
 import java.util.ArrayList;
 import java.util.List;
+import model.Usuario1;
 
 public class profesorDAO {
 
@@ -35,33 +36,7 @@ public class profesorDAO {
         }
     }
 
-    public List<Profesor> listarProfesores() {
-        List<Profesor> lista = new ArrayList<>();
-        String sql = """
-            SELECT p.idProfesor, u.nombre, p.departamento, p.cedula
-            FROM Profesor p
-            JOIN Usuario u ON p.idProfesor = u.idUsuario
-        """;
 
-        try (Connection conn = dbConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-
-            while (rs.next()) {
-                Profesor profesor = new Profesor();
-                profesor.setIdUsuario(rs.getInt("idProfesor"));
-                profesor.setNombre(rs.getString("nombre"));
-                profesor.setDepartamento(rs.getString("departamento"));
-                profesor.setCedula(rs.getString("cedula"));
-                lista.add(profesor);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("❌ Error al listar profesores: " + e.getMessage());
-        }
-
-        return lista;
-    }
 
     public void eliminarProfesor(int idProfesor) {
         String sql = "DELETE FROM Profesor WHERE idProfesor = ?";
@@ -99,6 +74,104 @@ public class profesorDAO {
     }
     return -1; // No encontrado
 }
+    // Método para buscar profesores por cédula
+    public List<Usuario1> buscarProfesorPorCedula(String cedula) throws SQLException {
+        List<Usuario1> profesores = new ArrayList<>();
+        String sql = "SELECT p.idPersona, p.nombre AS NombreProfesor, p.cedula, p.correo, p.telefono, pr.departamento "
+                   + "FROM Persona p "
+                   + "JOIN Usuario u ON p.idPersona = u.idPersona "
+                   + "JOIN Profesor pr ON u.idUsuario = pr.idProfesor "
+                   + "WHERE p.cedula = ?";
+
+        try (Connection conn = dbConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, cedula);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Usuario1 usuario = new Usuario1(
+                    rs.getInt("idPersona"),
+                    rs.getString("NombreProfesor"),
+                    rs.getString("cedula"),
+                    rs.getString("correo"),
+                    rs.getString("telefono"),
+                    rs.getString("departamento")
+                );
+                profesores.add(usuario);
+            }
+        }
+
+        return profesores;
+    }
+    
+     public List<Usuario1> buscarProfesorPorNombre(String nombre) throws SQLException {
+        List<Usuario1> profesores = new ArrayList<>();
+        String sql = "SELECT p.idPersona, p.nombre AS NombreProfesor, p.cedula, p.correo, p.telefono, pr.departamento "
+                   + "FROM Persona p "
+                   + "JOIN Usuario u ON p.idPersona = u.idPersona "
+                   + "JOIN Profesor pr ON u.idUsuario = pr.idProfesor "
+                   + "WHERE p.nombre LIKE ?";
+
+        try (Connection conn = dbConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + nombre + "%");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Usuario1 usuario = new Usuario1(
+                    rs.getInt("idPersona"),
+                    rs.getString("NombreProfesor"),
+                    rs.getString("cedula"),
+                    rs.getString("correo"),
+                    rs.getString("telefono"),
+                    rs.getString("departamento")
+                );
+                profesores.add(usuario);
+            }
+        }
+
+        return profesores;
+    }
+
+public List<Usuario1> listarProfesores() {
+    List<Usuario1> lista = new ArrayList<>();
+
+    String sql = "SELECT " +
+                 "    p.idPersona, " +
+                 "    p.nombre AS NombreProfesor, " +
+                 "    p.cedula, " +
+                 "    p.correo, " +
+                 "    p.telefono, " +
+                 "    pr.departamento " +
+                 "FROM Profesor pr " +
+                 "JOIN Usuario u ON pr.idProfesor = u.idUsuario " +
+                 "JOIN Persona p ON u.idPersona = p.idPersona";
+
+    try (Connection con = dbConnection.getConnection();  // Corrección aquí
+         PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+           Usuario1 usuario = new Usuario1(
+    rs.getInt("idPersona"),
+    rs.getString("NombreProfesor"),
+    rs.getString("cedula"),
+    rs.getString("correo"),
+    rs.getString("telefono"),
+    rs.getString("departamento")
+);
+            lista.add(usuario);
+        }
+
+    } catch (Exception e) {
+        System.out.println("❌ Error al listar profesores: " + e.getMessage());
+    }
+
+    return lista;
+}
+
 
 }
 

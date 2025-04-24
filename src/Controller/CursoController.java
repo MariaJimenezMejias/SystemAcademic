@@ -47,5 +47,48 @@ public class CursoController {
 
     public boolean eliminarCurso(int idCurso) {
         return CursoDAO.eliminarCurso(idCurso);
+       
+    }
+    
+    public List<Curso> listarCursosPorCarrera(String nombreCarrera) {
+    return CursoDAO.obtenerCursosPorCarrera(nombreCarrera);
+    
+    
+    
+}
+    
+    public void listarCursosPorIdCurso(int idCurso) {
+        // Aquí puedes hacer la consulta a la base de datos para obtener el curso por ID
+        Curso curso = CursoDAO.obtenerCursoPorId(idCurso);
+
+        if (curso == null) {
+            System.out.println("No se encontró el curso con ID: " + idCurso);
+        } else {
+            System.out.println("Curso encontrado:");
+            System.out.println("ID: " + curso.getIdCurso());
+            System.out.println("Nombre: " + curso.getNombre());
+            System.out.println("Créditos: " + curso.getCreditos());
+            System.out.println("Horas: " + curso.getHorasSemanales());
+            System.out.println("ID Ciclo: " + curso.getIdCiclo());
+        }
+    }
+    
+
+    public void listarCursosPorNombre(String nombreCurso) {
+        // Llamar al DAO para obtener los cursos que coincidan con el nombre
+        List<Curso> cursos = CursoDAO.obtenerCursosPorNombre(nombreCurso);
+
+        if (cursos.isEmpty()) {
+            System.out.println("No se encontraron cursos con el nombre: " + nombreCurso);
+        } else {
+            System.out.println("Cursos encontrados:");
+            for (Curso curso : cursos) {
+                System.out.println("ID: " + curso.getIdCurso() +
+                                   " | Nombre: " + curso.getNombre() +
+                                   " | Creditos: " + curso.getCreditos() +
+                                   " | Horas: " + curso.getHorasSemanales() +
+                                   " | ID Ciclo: " + curso.getIdCiclo());
+            }
+        }
     }
 }
