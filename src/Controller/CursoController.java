@@ -48,4 +48,16 @@ public class CursoController {
     public boolean eliminarCurso(int idCurso) {
         return CursoDAO.eliminarCurso(idCurso);
     }
+    
+    public List<Curso> buscarPorNombre(String nombre) {
+    return CursoDAO.buscarPorNombre(nombre);
+    }
+    
+    public Curso buscarPorCodigo(String codigo) {
+    return CursoDAO.buscarPorCodigo(codigo);
+    }
+    
+public List<Curso> buscarPorCarrera(String nombreCarrera) {
+    return CursoDAO.buscarPorCarrera(nombreCarrera);
+    }
 }

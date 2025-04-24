@@ -120,4 +120,28 @@ public class CarreraDAO {
         }
         return false;
     }
+    
+    // Buscar carreras por nombre (LIKE)
+public static List<Carrera> buscarPorNombre(String nombre) {
+    List<Carrera> carreras = new ArrayList<>();
+    String sql = "SELECT * FROM Carrera WHERE nombreCarrera LIKE ?";
+
+    try (Connection conn = dbConnection.getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+        pstmt.setString(1, "%" + nombre + "%");
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            carreras.add(new Carrera(
+                rs.getInt("idCarrera"),
+                rs.getString("titulo"),
+                rs.getString("nombreCarrera")
+            ));
+        }
+
+    } catch (SQLException e) {
+        System.out.println("❌ Error al buscar carrera por nombre: " + e.getMessage());
+    }
+    return carreras;
 }

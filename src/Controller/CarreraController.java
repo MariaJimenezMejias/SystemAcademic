@@ -94,4 +94,55 @@ public class CarreraController {
             System.out.println("❌ Error al eliminar la carrera.");
         }
     }
+    public static void buscarCarreraPorNombre() {
+        System.out.println("Ingrese el nombre de la carrera a buscar:");
+        String nombre = scanner.nextLine();
+
+        List<Carrera> carreras = CarreraDAO.buscarPorNombre(nombre);
+    
+        if (carreras.isEmpty()) {
+            System.out.println("❌ No se encontraron carreras.");
+        } else {
+             System.out.println("Resultados:");
+             for (Carrera carrera : carreras) {
+             System.out.println("ID: " + carrera.getIdCarrera() + " - " + carrera.getNombreCarrera());
+            }
+        }
+    }
+    public static void administrarCursosPorCarrera() {
+    System.out.println("Ingrese el ID de la carrera:");
+    int idCarrera = scanner.nextInt();
+    scanner.nextLine(); // Consumir salto de línea
+
+    int opcion;
+    do {
+        System.out.println("\n1. Ver cursos");
+        System.out.println("2. Agregar curso existente a la carrera");
+        System.out.println("3. Quitar curso de la carrera");
+        System.out.println("4. Salir");
+        opcion = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (opcion) {
+                case 1:
+                List<Curso> cursos = CursoDAO.buscarPorCarrera(idCarrera); // Debemos modificar ese método
+                for (Curso c : cursos) {
+                    System.out.println("- " + c.getNombre());
+                }
+                break;
+                case 2:
+                System.out.println("ID del curso a asociar:");
+                int idCurso = scanner.nextInt();
+                CursoDAO.asociarCursoACarrera(idCurso, idCarrera);
+                break;
+                case 3:
+                System.out.println("ID del curso a quitar:");
+                int idCursoQuitar = scanner.nextInt();
+                CursoDAO.quitarCursoDeCarrera(idCursoQuitar);
+                break;
+            }
+
+        } while (opcion != 4);
+    }
+
 }

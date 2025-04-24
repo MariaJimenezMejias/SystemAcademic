@@ -103,5 +103,35 @@ public class AlumnoController {
             System.out.println("❌ Error al mostrar los resultados: " + e.getMessage());
         }
     }
+    public void consultarHistorialAcademico() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la cédula del alumno: ");
+        String cedula = scanner.nextLine();
+
+        int idAlumno = alumnoDAO.obtenerIdAlumnoPorCedula(cedula);
+        if (idAlumno == -1) {
+            System.out.println("❌ Alumno no encontrado.");
+            return;
+        }
+
+        ResultSet rs = alumnoDAO.obtenerHistorialAcademico(idAlumno);
+        try {
+            boolean tieneRegistros = false;
+            while (rs.next()) {
+                System.out.println("Curso: " + rs.getString("curso"));
+                System.out.println("Grupo: " + rs.getInt("numeroGrupo"));
+                System.out.println("Ciclo: " + rs.getString("nombreCiclo"));
+                System.out.println("Nota: " + rs.getDouble("nota"));
+                System.out.println("-----------------------------");
+                tieneRegistros = true;
+            }
+
+            if (!tieneRegistros) {
+                System.out.println("⚠️ No hay historial académico registrado para este alumno.");
+            }
+        } catch (SQLException e) {
+            System.out.println("❌ Error al mostrar historial: " + e.getMessage());
+        }
+    }
 }
 

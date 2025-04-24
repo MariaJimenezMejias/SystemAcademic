@@ -63,5 +63,34 @@ public class ProfesorController {
 
         new profesorDAO().eliminarProfesor(id);
     }
+    public static void buscarPorNombre() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el nombre del profesor: ");
+        String nombre = scanner.nextLine();
+    
+        List<Profesor> profesores = new profesorDAO().buscarPorNombre(nombre);
+
+        if (profesores.isEmpty()) {
+        System.out.println("❌ No se encontraron profesores con ese nombre.");
+        } else {
+             for (Profesor p : profesores) {
+                System.out.println("ID: " + p.getIdUsuario() + ", Nombre: " + p.getNombre() + ", Departamento: " + p.getDepartamento() + ", Cédula: " + p.getCedula());
+            }
+        }   
+    }
+public static void buscarPorCedula() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la cédula del profesor: ");
+        String cedula = scanner.nextLine();
+
+        Profesor profesor = new profesorDAO().buscarPorCedula(cedula);
+
+        if (profesor == null) {
+         System.out.println("❌ Profesor no encontrado.");
+        } else {
+            System.out.println("ID: " + profesor.getIdUsuario() + ", Nombre: " + profesor.getNombre() + ", Departamento: " + profesor.getDepartamento() + ", Cédula: " + profesor.getCedula());
+        }
+    }
+
 }
 

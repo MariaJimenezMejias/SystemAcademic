@@ -15,22 +15,25 @@ public class Curso {
     private int creditos;
     private int horasSemanales;
     private int idCiclo;
+    private int idCarrera;
 
     // Constructor con ID (usado al recuperar de la base de datos)
-    public Curso(int idCurso, String nombre, int creditos, int horasSemanales, int idCiclo) {
+    public Curso(int idCurso, String nombre, int creditos, int horasSemanales, int idCiclo, int idCarrera) {
         this.idCurso = idCurso;
         this.nombre = nombre;
         this.creditos = creditos;
         this.horasSemanales = horasSemanales;
         this.idCiclo = idCiclo;
+        this.idCarrera = idCarrera;
     }
 
     // Constructor sin ID (usado al insertar)
-    public Curso(String nombre, int creditos, int horasSemanales, int idCiclo) {
+    public Curso(String nombre, int creditos, int horasSemanales, int idCiclo, int idCarrera) {
         this.nombre = nombre;
         this.creditos = creditos;
         this.horasSemanales = horasSemanales;
         this.idCiclo = idCiclo;
+        this.idCarrera = idCarrera;
     }
 
     public int getIdCurso() {
@@ -71,5 +74,13 @@ public class Curso {
 
     public void setIdCiclo(int idCiclo) {
         this.idCiclo = idCiclo;
+    }
+    
+    public int getIdCarrera() {
+        return idCarrera;
+    } 
+
+    public void setIdCarrera(int idCarrera) {
+        this.idCarrera = idCarrera;
     }
 }

@@ -99,6 +99,65 @@ public class profesorDAO {
     }
     return -1; // No encontrado
 }
+    public List<Profesor> buscarPorNombre(String nombre) {
+        List<Profesor> lista = new ArrayList<>();
+        String sql = """
+            SELECT p.idProfesor, u.nombre, p.departamento, p.cedula
+          FROM Profesor p
+          JOIN Usuario u ON p.idProfesor = u.idUsuario
+          WHERE u.nombre LIKE ?
+      """;
+
+     try (Connection conn = dbConnection.getConnection();
+          PreparedStatement pstmt = conn.prepareStatement(sql)) {
+         
+         pstmt.setString(1, "%" + nombre + "%");
+          ResultSet rs = pstmt.executeQuery();
+          
+          while (rs.next()) {
+             Profesor profesor = new Profesor();
+             profesor.setIdUsuario(rs.getInt("idProfesor"));
+              profesor.setNombre(rs.getString("nombre"));
+             profesor.setDepartamento(rs.getString("departamento"));
+             profesor.setCedula(rs.getString("cedula"));
+             lista.add(profesor);
+            }     
+          
+        } catch (SQLException e) {
+         System.out.println("❌ Error al buscar profesor por nombre: " + e.getMessage());
+        }
+
+        return lista;
+    }
+    public Profesor buscarPorCedula(String cedula) {
+     String sql = """
+        SELECT p.idProfesor, u.nombre, p.departamento, p.cedula
+        FROM Profesor p
+        JOIN Usuario u ON p.idProfesor = u.idUsuario
+        WHERE p.cedula = ?
+     """;
+
+     try (Connection conn = dbConnection.getConnection();
+          PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+         pstmt.setString(1, cedula);
+         ResultSet rs = pstmt.executeQuery();
+
+         if (rs.next()) {
+              Profesor profesor = new Profesor();
+             profesor.setIdUsuario(rs.getInt("idProfesor"));
+             profesor.setNombre(rs.getString("nombre"));
+             profesor.setDepartamento(rs.getString("departamento"));
+              profesor.setCedula(rs.getString("cedula"));
+              return profesor;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Error al buscar profesor por cédula: " + e.getMessage());
+        }
+
+     return null;
+    }
 
 }
 

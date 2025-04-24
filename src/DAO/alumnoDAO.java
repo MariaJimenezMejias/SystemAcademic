@@ -104,4 +104,26 @@ public class alumnoDAO {
             return null;
         }
     }
+    public ResultSet obtenerHistorialAcademico(int idAlumno) {
+        String sql = """
+            SELECT cu.nombre AS curso, g.numeroGrupo, c.nombreCiclo, mc.nota
+         FROM MatriculaCurso mc
+            JOIN Grupo g ON mc.idGrupo = g.idGrupo
+            JOIN Curso cu ON g.idCurso = cu.idCurso
+            JOIN Ciclo c ON g.idCiclo = c.idCiclo
+            WHERE mc.idAlumno = ?
+            ORDER BY c.nombreCiclo ASC
+        """;
+
+        try {
+            Connection conn = dbConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, idAlumno);
+            return pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("❌ Error al obtener historial académico: " + e.getMessage());
+            return null;
+        }
+    }
+
 }
