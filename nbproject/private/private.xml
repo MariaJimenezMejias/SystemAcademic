@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/menuProfesor.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/ProfesorController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/AlumnoController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/CarreraController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/CicloController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/CrearUsuarioController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/GrupoController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/CursoController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/LoginController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/MatriculaController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/MatriculadorController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/CarreraDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/CicloDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/CursoDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/GrupoDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/MatriculaCarreraDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/MatriculaDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/administradorDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/alumnoDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/matriculadorDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/profesorDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Administrador.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Alumno.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Carrera.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Ciclo.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Curso.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Grupo.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Login.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Matriculador.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Matricula.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Profesor.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Usuario.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/LoginView.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/MenuCiclo.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/MenuVista.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/menuCarrera.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/menuCurso.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/menuGrupo.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/model/Usuario1.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DAO/UsuarioDAO.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/Controller/UsuarioController.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/DB/dbConnection.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/UsuarioView.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/systemacademic/SystemAcademic.java</file>
+            <file>file:/C:/Users/maria/Documents/NetBeansProjects/SystemAcademic/src/view/MenuUsuario.java</file>
+        </group>
+    </open-files>
+</project-private>
