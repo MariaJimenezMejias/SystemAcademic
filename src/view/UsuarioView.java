@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UsuarioView {
 
-    // Método para mostrar los profesores encontrados
+    // Metodo para mostrar los profesores encontrados
     public void mostrarProfesores(List<Usuario1> profesores) {
         if (profesores.isEmpty()) {
             System.out.println("No se encontraron profesores.");
@@ -23,16 +23,16 @@ public class UsuarioView {
             for (Usuario1 profesor : profesores) {
                 System.out.println("ID: " + profesor.getIdPersona());
                 System.out.println("Nombre: " + profesor.getNombreProfesor());
-                System.out.println("Cédula: " + profesor.getCedula());
+                System.out.println("Cedula: " + profesor.getCedula());
                 System.out.println("Correo: " + profesor.getCorreo());
-                System.out.println("Teléfono: " + profesor.getTelefono());
+                System.out.println("Telefono: " + profesor.getTelefono());
                 System.out.println("Departamento: " + profesor.getDepartamento());
                 System.out.println("-----------------------------------");
             }
         }
     }
 
-    // Método para mostrar mensajes de error
+    // Metodo para mostrar mensajes de error
     public void mostrarError(String mensaje) {
         System.out.println("ERROR: " + mensaje);
     }

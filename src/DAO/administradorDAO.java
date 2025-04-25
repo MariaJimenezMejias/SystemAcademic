@@ -17,12 +17,12 @@ public class administradorDAO {
 
             int filas = pstmt.executeUpdate();
             if (filas > 0) {
-                System.out.println("✅ Administrador insertado correctamente.");
+                System.out.println("Administrador insertado correctamente.");
             } else {
-                System.out.println("❌ No se pudo insertar el administrador.");
+                System.out.println("No se pudo insertar el administrador.");
             }
         } catch (SQLException e) {
-            System.out.println("❌ Error al insertar administrador: " + e.getMessage());
+            System.out.println("Error al insertar administrador: " + e.getMessage());
         }
     }
     
@@ -36,7 +36,7 @@ public class administradorDAO {
                 return rs.getInt(1) > 0;
             }
         } catch (SQLException e) {
-            System.out.println("❌ Error verificando admin: " + e.getMessage());
+            System.out.println("Error verificando admin: " + e.getMessage());
         }
         return false;
     }

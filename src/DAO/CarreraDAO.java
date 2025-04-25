@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import Controller.CursoController; // Asegurate que exista
+import java.util.HashMap;
+import java.util.Map;
 
 public class CarreraDAO {
 
@@ -113,58 +115,105 @@ public class CarreraDAO {
         return false;
     }
 
-    public void listarCursosPorCarrera(int idCarrera) {
-        String sql = "SELECT cu.idCurso, cu.nombre AS nombreCurso, cu.creditos, cu.horasSemanales " +
-                     "FROM Carrera ca " +
-                     "JOIN Ciclo ci ON ca.idCarrera = ci.idCarrera " +
-                     "JOIN Curso cu ON ci.idCiclo = cu.idCiclo " +
-                     "WHERE ca.idCarrera = ?";
+   public void listarCursosPorCarrera(int idCarrera) {
+    String sql = "SELECT cu.idCurso, cu.nombre AS nombreCurso, cu.creditos, cu.horasSemanales " +
+                 "FROM Carrera ca " +
+                 "JOIN Ciclo ci ON ca.idCarrera = ci.idCarrera " +
+                 "JOIN Curso cu ON ci.idCiclo = cu.idCiclo " +
+                 "WHERE ca.idCarrera = ?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idCarrera);
-            ResultSet rs = stmt.executeQuery();
+    try (Connection conn = dbConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            System.out.println("Cursos de la carrera con ID: " + idCarrera);
-            while (rs.next()) {
-                int idCurso = rs.getInt("idCurso");
-                String nombreCurso = rs.getString("nombreCurso");
-                int creditos = rs.getInt("creditos");
-                int horasSemanales = rs.getInt("horasSemanales");
+        stmt.setInt(1, idCarrera);
+        ResultSet rs = stmt.executeQuery();
 
-                System.out.println("ID: " + idCurso +
-                                   ", Nombre: " + nombreCurso +
-                                   ", Creditos: " + creditos +
-                                   ", Horas semanales: " + horasSemanales);
+        List<Integer> listaIds = new ArrayList<>();
+        Map<Integer, String> cursosMap = new HashMap<>();
 
-                if (nombreCurso != null && !nombreCurso.isEmpty()) {
-                    System.out.print("Desea editar este curso? (1 para si, 2 para no): ");
-                    int opcion = scanner.nextInt();
-                    scanner.nextLine();
+        System.out.println("Cursos disponibles para la carrera con ID: " + idCarrera);
+        while (rs.next()) {
+            int idCurso = rs.getInt("idCurso");
+            String nombreCurso = rs.getString("nombreCurso");
+            int creditos = rs.getInt("creditos");
+            int horasSemanales = rs.getInt("horasSemanales");
 
-                    if (opcion == 1) {
-                        System.out.print("Nuevo nombre: ");
-                        String nuevoNombre = scanner.nextLine();
-                        System.out.print("Nuevos creditos: ");
-                        int nuevosCreditos = scanner.nextInt();
-                        System.out.print("Nuevas horas semanales: ");
-                        int nuevasHoras = scanner.nextInt();
-                        System.out.print("Nuevo ID de ciclo: ");
-                        int nuevoIdCiclo = scanner.nextInt();
+            System.out.println("ID: " + idCurso +
+                               " | Nombre: " + nombreCurso +
+                               " | Creditos: " + creditos +
+                               " | Horas por semana: " + horasSemanales);
 
-                        boolean actualizado = controller.actualizarCurso(idCurso, nuevoNombre, nuevosCreditos, nuevasHoras, nuevoIdCiclo);
-                        if (actualizado) {
-                            System.out.println("Curso actualizado correctamente.");
-                        } else {
-                            System.out.println("Error al actualizar el curso.");
-                        }
-                    }
-                }
-            }
+            listaIds.add(idCurso);
+            cursosMap.put(idCurso, nombreCurso);
+        }
 
-        } catch (SQLException e) {
-            System.err.println("Error al obtener los cursos: " + e.getMessage());
+        if (listaIds.isEmpty()) {
+            System.out.println("No hay cursos registrados para esta carrera.");
+            return;
+        }
+
+        // Aquí sólo realizas la parte de la lógica sin recibir Scanner en este método
+        int idSeleccionado = obtenerIdSeleccionado();  // Llamada a método que maneja la entrada de usuario
+        if (idSeleccionado == 0) return;
+
+        if (!listaIds.contains(idSeleccionado)) {
+            System.out.println("ID no válido, debe pertenecer a esta carrera. Intente de nuevo.");
+            return;
+        }
+
+        System.out.println("Editando curso: " + cursosMap.get(idSeleccionado));
+        // Aquí puedes continuar con la edición del curso
+        editarCurso(idSeleccionado);  // Llamada a otro método que maneja la edición del curso
+
+    } catch (SQLException e) {
+        System.out.println("Error al obtener los cursos: " + e.getMessage());
+    }
+}
+
+private int obtenerIdSeleccionado() {
+    Scanner scanner = new Scanner(System.in);
+    int idSeleccionado;
+
+    while (true) {
+        System.out.print("Ingrese el ID del curso que desea editar (0 para salir): ");
+        if (scanner.hasNextInt()) {
+            idSeleccionado = scanner.nextInt();
+            scanner.nextLine(); // Limpiar el buffer
+
+            if (idSeleccionado == 0) return idSeleccionado;
+
+            break;
+        } else {
+            System.out.println("Entrada no válida, intente de nuevo.");
+            scanner.nextLine(); // Limpiar el buffer
         }
     }
+
+    return idSeleccionado;
+}
+
+private void editarCurso(int idSeleccionado) {
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Editando curso con ID: " + idSeleccionado);
+    System.out.print("Nuevo nombre: ");
+    String nuevoNombre = scanner.nextLine();
+    System.out.print("Nuevos créditos: ");
+    int nuevosCreditos = scanner.nextInt();
+    System.out.print("Nuevas horas semanales: ");
+    int nuevasHoras = scanner.nextInt();
+    System.out.print("Nuevo ID de ciclo: ");
+    int nuevoIdCiclo = scanner.nextInt();
+
+    // Aquí va la lógica para actualizar el curso
+    boolean actualizado = controller.actualizarCurso(idSeleccionado, nuevoNombre, nuevosCreditos, nuevasHoras, nuevoIdCiclo);
+    if (actualizado) {
+        System.out.println("Curso actualizado correctamente.");
+    } else {
+        System.out.println("Error al actualizar el curso.");
+    }
+}
+
+
 
     public static Carrera busquedaCarreraCodigo(int idCarrera) {
         String sql = "SELECT idCarrera, titulo, nombreCarrera FROM Carrera WHERE idCarrera = ?";

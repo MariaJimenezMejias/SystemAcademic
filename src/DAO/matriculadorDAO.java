@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import java.sql.Connection;
@@ -9,7 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import DB.dbConnection;
 import model.Matriculador;
-import java.sql.ResultSet; 
+import java.sql.ResultSet;
+
 public class matriculadorDAO {
 
     public void insertarMatriculador(Matriculador matriculador) {
@@ -22,13 +19,13 @@ public class matriculadorDAO {
             pstmt.setString(2, matriculador.getEstado());
 
             pstmt.executeUpdate();
-            System.out.println("✅ Matriculador insertado correctamente.");
+            System.out.println("Matriculador insertado correctamente.");
         } catch (SQLException e) {
-            System.out.println("❌ Error al insertar el matriculador: " + e.getMessage());
+            System.out.println("Error al insertar el matriculador: " + e.getMessage());
         }
     }
     
-     public static boolean existeMatriculadorPorId(int idMatriculador) {
+    public static boolean existeMatriculadorPorId(int idMatriculador) {
         String sql = "SELECT COUNT(*) FROM Matriculador WHERE idMatriculador = ?";
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -38,9 +35,8 @@ public class matriculadorDAO {
                 return rs.getInt(1) > 0;
             }
         } catch (SQLException e) {
-            System.out.println("❌ Error verificando matriculador: " + e.getMessage());
+            System.out.println("Error verificando matriculador: " + e.getMessage());
         }
         return false;
     }
 }
-

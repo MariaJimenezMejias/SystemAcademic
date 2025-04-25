@@ -30,7 +30,7 @@ public class menuCurso {
                 case 1:
                     System.out.print("Nombre del curso: ");
                     String nombre = scanner.nextLine();
-                    System.out.print("Créditos: ");
+                    System.out.print("Creditos: ");
                     int creditos = scanner.nextInt();
                     System.out.print("Horas semanales: ");
                     int horas = scanner.nextInt();
@@ -53,7 +53,7 @@ public class menuCurso {
                         for (Curso curso : cursos) {
                             System.out.println("ID: " + curso.getIdCurso() +
                                                " | Nombre: " + curso.getNombre() +
-                                               " | Créditos: " + curso.getCreditos() +
+                                               " | Creditos: " + curso.getCreditos() +
                                                " | Horas: " + curso.getHorasSemanales() +
                                                " | ID Ciclo: " + curso.getIdCiclo());
                         }
@@ -68,7 +68,7 @@ public class menuCurso {
                         System.out.println("Curso encontrado:");
                         System.out.println("ID: " + encontrado.getIdCurso());
                         System.out.println("Nombre: " + encontrado.getNombre());
-                        System.out.println("Créditos: " + encontrado.getCreditos());
+                        System.out.println("Creditos: " + encontrado.getCreditos());
                         System.out.println("Horas: " + encontrado.getHorasSemanales());
                         System.out.println("ID Ciclo: " + encontrado.getIdCiclo());
                     } else {
@@ -82,7 +82,7 @@ public class menuCurso {
                     scanner.nextLine(); // limpiar buffer
                     System.out.print("Nuevo nombre: ");
                     String nuevoNombre = scanner.nextLine();
-                    System.out.print("Nuevos créditos: ");
+                    System.out.print("Nuevos creditos: ");
                     int nuevosCreditos = scanner.nextInt();
                     System.out.print("Nuevas horas semanales: ");
                     int nuevasHoras = scanner.nextInt();
@@ -137,4 +137,61 @@ public class menuCurso {
             }
         }
     }
+    
+    
+       public static void menuCurso1(int idCurso) {
+    Scanner scanner = new Scanner(System.in);
+    CursoController controller = new CursoController();
+
+    while (true) {
+        System.out.println("\n=== Menu de Cursos ===");
+        System.out.println("1. Actualizar curso");
+        System.out.println("2. Eliminar curso");
+        System.out.println("3. Volver al menu anterior");
+
+        System.out.print("Seleccione una opcion: ");
+        int opcion = scanner.nextInt();
+        scanner.nextLine();  // Limpiar buffer
+
+        switch (opcion) {
+            case 1:
+                // Obtener la información actual del curso y actualizarla
+                System.out.print("Nuevo nombre: ");
+                String nuevoNombre = scanner.nextLine();
+                System.out.print("Nuevos creditos: ");
+                int nuevosCreditos = scanner.nextInt();
+                System.out.print("Nuevas horas semanales: ");
+                int nuevasHoras = scanner.nextInt();
+                System.out.print("Nuevo ID de ciclo: ");
+                int nuevoIdCiclo = scanner.nextInt();
+
+                // Llamamos al controlador para actualizar el curso
+                boolean actualizado = controller.actualizarCurso(idCurso, nuevoNombre, nuevosCreditos, nuevasHoras, nuevoIdCiclo);
+                if (actualizado) {
+                    System.out.println("Curso actualizado correctamente.");
+                } else {
+                    System.out.println("Error al actualizar el curso.");
+                }
+                break;
+
+            case 2:
+                // Eliminar el curso con el ID proporcionado
+                boolean eliminado = controller.eliminarCurso(idCurso);
+                if (eliminado) {
+                    System.out.println("Curso eliminado correctamente.");
+                } else {
+                    System.out.println("Error al eliminar el curso.");
+                }
+                break;
+
+            case 3:
+                System.out.println("Volviendo al menu anterior...");
+                return;  // Vuelve al menú anterior
+
+            default:
+                System.out.println("Opcion no valida.");
+        }
+    }
+}
+
 }

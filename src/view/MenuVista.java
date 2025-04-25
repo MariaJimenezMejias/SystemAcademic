@@ -16,8 +16,8 @@ public class MenuVista {
     public void mostrarMenuCrearUsuario() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== Creación de Usuario ===");
-        System.out.println("Ingrese la cédula:");
+        System.out.println("=== Creacion de Usuario ===");
+        System.out.println("Ingrese la cedula:");
         String cedula = scanner.nextLine();
 
         System.out.println("Ingrese la clave:");
@@ -28,7 +28,6 @@ public class MenuVista {
 
         // Llamar al controlador para crear el usuario
         CrearUsuarioController crearUsuarioController = new CrearUsuarioController();
-        crearUsuarioController.crearUsuario(cedula, clave, tipo);  // Controlador maneja la lógica
+        crearUsuarioController.crearUsuario(cedula, clave, tipo);  // Controlador maneja la logica
     }
 }
-

@@ -8,7 +8,7 @@ public class MenuPersona {
     private PersonaController personaController;
 
     // Constructor
-        public MenuPersona() {
+    public MenuPersona() {
         personaController = new PersonaController();
     }
 

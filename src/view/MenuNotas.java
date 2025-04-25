@@ -3,7 +3,7 @@ package view;
 import model.Nota;
 import Controller.LoginController;
 import java.util.Scanner;
-
+import view.menuProfesor;
 public class MenuNotas {
 
     private Nota nota;
@@ -46,14 +46,14 @@ public class MenuNotas {
             System.out.println("La nota se ha insertado correctamente.");
 
             // Preguntar si el usuario desea insertar otra nota
-            System.out.print("¿Deseas insertar otra nota? (S/N): ");
+            System.out.print("Deseas insertar otra nota? (S/N): ");
             String respuesta = scanner.next();
             if (respuesta.equalsIgnoreCase("N")) {
                 continuar = false; // Salir del bucle si la respuesta es 'N'
             }
         }
-
-        // Mensaje final
+       
+      
         System.out.println("Volviendo al menu principal...");
     }
 }

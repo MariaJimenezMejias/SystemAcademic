@@ -50,7 +50,7 @@ public class menuCarrera {
                 break;
                 case 8:
                     System.out.println("Hasta luego!");
-                    scanner.close();  // Cerrar el scanner
+                    System.exit(-1);  // Cerrar el scanner
                     return;
                 default:
                     System.out.println("Opcion no valida. Intente nuevamente.");

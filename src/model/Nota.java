@@ -35,7 +35,7 @@ public class Nota {
 
                 // Mostrar la información de los grupos
                 System.out.println("ID Grupo: " + idGrupo +
-                                   ", Número: " + numeroGrupo +
+                                   ", Numero: " + numeroGrupo +
                                    ", Horario: " + horario +
                                    ", ID Curso: " + idCurso);
             }

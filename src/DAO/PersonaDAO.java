@@ -5,8 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import model.Persona;
 import DB.dbConnection;
-
+import Controller.LoginController;
 public class PersonaDAO {
+    private static int idUsuarioGuardar;
+
+    public static int getIdUsuarioGuardado() {
+        return idUsuarioGuardar;
+    }
 
     public void insertarPersona(Persona persona) {
         String sql = "INSERT INTO Persona (cedula, nombre, telefono, direccion, correo) VALUES (?, ?, ?, ?, ?)";
@@ -23,11 +28,11 @@ public class PersonaDAO {
             int filasInsertadas = stmt.executeUpdate();
 
             if (filasInsertadas > 0) {
-                // Obtener el ID generado automáticamente por la base de datos
                 try (var rs = stmt.getGeneratedKeys()) {
                     if (rs.next()) {
-                        int idUsuario = rs.getInt(1); // Asumiendo que el ID es el primer campo
-                        persona.setIdUsuario(idUsuario); // Establecemos el ID generado
+                        int idUsuario = rs.getInt(1);
+                        persona.setIdUsuario(idUsuario);
+                        idUsuarioGuardar = idUsuario;
                         System.out.println("Se ha registrado a la persona con el ID de usuario: " + persona.getIdUsuario());
                     }
                 }

@@ -23,7 +23,7 @@ public class LoginController {
 
             // Intentamos autenticar al usuario
             if (Login.autenticarUsuario(correo, clave)) {
-                System.out.println("Éxito. Tipo de usuario: " + tipoUsuario);  // Verifica que tipoUsuario se haya asignado correctamente
+                System.out.println("Exito. Tipo de usuario: " + tipoUsuario);  // Verifica que tipoUsuario se haya asignado correctamente
                 menuUsuario();  // Mostrar el menú del usuario
                 break;  // Salir del bucle si la autenticación es exitosa
             } else {

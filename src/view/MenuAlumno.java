@@ -13,11 +13,10 @@ import Controller.HistorialAdminController;
 public class MenuAlumno {
 
     private Scanner scanner;
-    private Historial consultaHistorial;
 
     public MenuAlumno() {
         this.scanner = new Scanner(System.in);
-        this.consultaHistorial = new Historial();
+
     }
 
     public void mostrarMenuAlumno() {

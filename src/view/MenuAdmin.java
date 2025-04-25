@@ -31,7 +31,7 @@ public class MenuAdmin {
               
             System.out.println("7. Matricula");
             System.out.println("8. Consultar historial");
-            System.out.println("8. Salir");
+            System.out.println("9. Salir");
 
             System.out.print("Elija una opcion: ");
             int opcion = scanner.nextInt();
@@ -78,7 +78,8 @@ public class MenuAdmin {
                     
                     case 9:
                     System.out.println("Saliendo del menu de administracion...");
-                    return;
+                    System.exit(-1);
+                    break;
                     
                      case 6:
                      menuGrupo menuGrupo = new menuGrupo();

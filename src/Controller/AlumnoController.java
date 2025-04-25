@@ -15,18 +15,40 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 import view.MenuPersona;
-
+import java.sql.Date;
+import view.MenuAdmin;
 public class AlumnoController {
    UsuarioController usuarioController = new UsuarioController();
    MenuPersona menuPersona = new MenuPersona();
+   MenuAdmin menuAdmin = new MenuAdmin();
     private final alumnoDAO alumnoDAO = new alumnoDAO();
 
     // Metodo para registrar alumno
     public void registrarAlumno(int idPersona, java.sql.Date fechaNacimiento) {
+       
         java.sql.Date fechaRegistro = new java.sql.Date(System.currentTimeMillis()); // Fecha actual
         Alumno alumno = new Alumno(idPersona, fechaNacimiento, fechaRegistro);
         alumnoDAO.insertarAlumno(alumno);
     }
+    
+        public void llamarRegistro(){
+            
+        int idPersona=0;
+         Scanner scanner = new Scanner(System.in);
+     System.out.println("Ingrese el id del alumno");
+    idPersona = scanner.nextInt();
+     
+       System.out.println("Ingrese la fecha de nacimiento del alumno (formato yyyy-mm-dd):");
+        String fechaNacimientoStr = scanner.next();  // Se lee como String
+
+        // Convertir la cadena de texto a java.sql.Date
+            java.sql.Date fechaNacimiento = Date.valueOf(fechaNacimientoStr);
+         AlumnoController alumnoController = new AlumnoController();
+        // Crear la fecha de registro con la fecha actual
+      alumnoController.registrarAlumno(idPersona, fechaNacimiento);
+    }
+    
+
 
     // Metodo para manejar la busqueda dependiendo de lo que el usuario elija
 public void buscarAlumno() {
@@ -38,6 +60,7 @@ public void buscarAlumno() {
     System.out.println("2. Buscar por cedula");
     System.out.println("3. Buscar por carrera");
     System.out.println("4. Registrar alumno");
+        System.out.println("5.Volver");
     System.out.print("Ingrese el numero correspondiente: ");
     int opcion = scanner.nextInt();
     scanner.nextLine();  // Limpiar el buffer del scanner
@@ -64,31 +87,18 @@ public void buscarAlumno() {
             menuPersona.mostrarMenu();
             usuarioController.registrarUsuario();
             AlumnoController alumnoController = new AlumnoController();
-            alumnoController.registrarAlumnoDesdeConsola();
+            alumnoController.llamarRegistro();
             break;
+         case 5:
+            menuAdmin.menuAdmin();
+            break;
+            
         default:
             System.out.println("Opcion no valida. Intente de nuevo.");
     }
 }
 
-public void registrarAlumnoDesdeConsola() {
-    Scanner scanner = new Scanner(System.in);
 
-    System.out.print("Ingrese el ID de la persona: ");
-    int idPersona = scanner.nextInt();
-    scanner.nextLine(); // Limpiar buffer
-
-    System.out.print("Ingrese la fecha de nacimiento (YYYY-MM-DD): ");
-    String fechaTexto = scanner.nextLine();
-
-    try {
-        java.sql.Date fechaNacimiento = java.sql.Date.valueOf(fechaTexto);
-        registrarAlumno(idPersona, fechaNacimiento);
-        System.out.println("Alumno registrado exitosamente.");
-    } catch (IllegalArgumentException e) {
-        System.out.println("Fecha invalida. Use el formato YYYY-MM-DD.");
-    }
-}
 
     // Metodo para buscar por nombre
     private void buscarPorNombre(String nombre) {
