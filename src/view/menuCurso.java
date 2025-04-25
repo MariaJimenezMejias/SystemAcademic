@@ -18,7 +18,6 @@ public class menuCurso {
             System.out.println("3. Obtener curso por ID");
             System.out.println("4. Actualizar curso");
             System.out.println("5. Eliminar curso");
-            System.out.println("6. Listar cursos por carrera");
             System.out.println("7. Obtener curso por ID de curso");
             System.out.println("8. Listar cursos por nombre");
             System.out.println("9. Volver al menu principal");

@@ -1,9 +1,8 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change esta license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java para editar esta plantilla
  */
 package Controller;
-
 
 /**
  *
@@ -15,9 +14,11 @@ import model.Alumno;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import view.MenuPersona;
 
 public class AlumnoController {
-
+   UsuarioController usuarioController = new UsuarioController();
+   MenuPersona menuPersona = new MenuPersona();
     private final alumnoDAO alumnoDAO = new alumnoDAO();
 
     // Metodo para registrar alumno
@@ -36,6 +37,7 @@ public void buscarAlumno() {
     System.out.println("1. Buscar por nombre");
     System.out.println("2. Buscar por cedula");
     System.out.println("3. Buscar por carrera");
+    System.out.println("4. Registrar alumno");
     System.out.print("Ingrese el numero correspondiente: ");
     int opcion = scanner.nextInt();
     scanner.nextLine();  // Limpiar el buffer del scanner
@@ -57,6 +59,12 @@ public void buscarAlumno() {
             System.out.print("Ingrese la carrera del alumno: ");
             datoBusqueda = scanner.nextLine();
             buscarPorCarrera(datoBusqueda);
+            break;
+        case 4:
+            menuPersona.mostrarMenu();
+            usuarioController.registrarUsuario();
+            AlumnoController alumnoController = new AlumnoController();
+            alumnoController.registrarAlumnoDesdeConsola();
             break;
         default:
             System.out.println("Opcion no valida. Intente de nuevo.");

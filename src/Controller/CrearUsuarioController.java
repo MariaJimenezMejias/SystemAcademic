@@ -4,10 +4,6 @@
  */
 package Controller;
 
-/**
- *
- * @author maria
- */
 // File: src/controller/CrearUsuarioControlador.java
 
 import model.Usuario;
@@ -22,36 +18,37 @@ import model.Profesor;
 import model.Administrador;
 import Controller.AdministradorController;
 import Controller.AlumnoController;
+
 public class CrearUsuarioController {
 
     public void crearUsuario(String cedula, String clave, String tipo) {
-        // Verificar si la cédula existe en la tabla Persona y obtener el idPersona
+        // Verificar si la cedula existe en la tabla Persona y obtener el idPersona
         int idPersona = obtenerIdPersonaPorCedula(cedula);
 
         if (idPersona == -1) {
-            System.out.println("❌ Error: La cédula no existe en la tabla Persona.");
+            System.out.println("Error: La cedula no existe en la tabla Persona.");
             return;
         }
 
-        // Ciclo while para asegurarnos de que el tipo de usuario es válido
+        // Ciclo while para asegurarnos de que el tipo de usuario es valido
         while (!(tipo.equalsIgnoreCase("admin") || tipo.equalsIgnoreCase("matriculador")
                  || tipo.equalsIgnoreCase("alumno") || tipo.equalsIgnoreCase("profesor"))) {
-            // Si el tipo no es válido, volver a preguntar por el tipo
-            System.out.println("❌ Tipo de usuario no válido. Por favor, ingrese un tipo válido (admin, matriculador, alumno, profesor):");
+            // Si el tipo no es valido, volver a preguntar por el tipo
+            System.out.println("Por favor, ingrese un tipo valido (admin, matriculador, alumno, profesor):");
             tipo = new Scanner(System.in).nextLine(); // Solicitar el tipo de usuario nuevamente
         }
 
-        // Crear el objeto Usuario y llamar al método de inserción
+        // Crear el objeto Usuario y llamar al metodo de insercion
         Usuario usuario = new Usuario(idPersona, clave, tipo);
         try {
             int idUsuario = usuario.insertarUsuario();
             if (idUsuario > 0) {
-                System.out.println("✅ Usuario creado con éxito.");
+                System.out.println("Usuario creado con exito.");
 
                 // Si el tipo es "admin", insertar en la tabla Administrador
                 if ("admin".equalsIgnoreCase(tipo)) {
-               AdministradorController administradorController = new AdministradorController();
-               administradorController.crearAdministrador(idUsuario);
+                    AdministradorController administradorController = new AdministradorController();
+                    administradorController.crearAdministrador(idUsuario);
 
                 }
                 // Si el tipo es "alumno", insertar en la tabla Alumno
@@ -61,37 +58,32 @@ public class CrearUsuarioController {
                     String fechaNacimientoStr = new Scanner(System.in).nextLine();
                     
                     // Convertir la fecha de nacimiento en tipo java.sql.Date
-                    Date fechaNacimiento = Date.valueOf(fechaNacimientoStr); // Convertir el String en un objeto Date
+                    Date fechaNacimiento = Date.valueOf(fechaNacimientoStr); 
                     
-                    Date fechaRegistro = Date.valueOf(java.time.LocalDate.now()); // Fecha de registro es la fecha actual
+                    Date fechaRegistro = Date.valueOf(java.time.LocalDate.now()); 
 
-                    // Crear el objeto Alumno y llamar al método de inserción
+                    // Crear el objeto Alumno y llamar al metodo de insercion
                     AlumnoController alumnoController = new AlumnoController();
                     alumnoController.registrarAlumno(idPersona, fechaNacimiento);
                 } 
-                    else if ("profesor".equalsIgnoreCase(tipo)) {
-              
-
-                  ProfesorController.crearProfesor(); // ✅ método sin parámetros
-               
-                } else if ("matriculador".equalsIgnoreCase(tipo)){
-                   MatriculadorController controller = new MatriculadorController();
-
-                System.out.println("Ingrese el estado del matriculador:");
-                String estado = new Scanner(System.in).nextLine();
-
-                controller.crearMatriculador(idUsuario, estado);
-
+                else if ("profesor".equalsIgnoreCase(tipo)) {
+                    ProfesorController.crearProfesor(); // metodo sin parametros
+                } 
+                else if ("matriculador".equalsIgnoreCase(tipo)) {
+                    MatriculadorController controller = new MatriculadorController();
+                    System.out.println("Ingrese el estado del matriculador:");
+                    String estado = new Scanner(System.in).nextLine();
+                    controller.crearMatriculador(idUsuario, estado);
                 }
             } else {
-                System.out.println("❌ Error: No se pudo obtener el idUsuario.");
+                System.out.println("Error: No se pudo obtener el idUsuario.");
             }
         } catch (SQLException e) {
-            System.out.println("❌ Error al crear usuario: " + e.getMessage());
+            System.out.println("Error al crear usuario: " + e.getMessage());
         }
     }
 
-    // Método para obtener el idPersona por la cédula
+    // Metodo para obtener el idPersona por la cedula
     public static int obtenerIdPersonaPorCedula(String cedula) {
         String sql = "SELECT idPersona FROM Persona WHERE cedula = ?";
         try (Connection conn = dbConnection.getConnection();
@@ -101,12 +93,12 @@ public class CrearUsuarioController {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                return rs.getInt("idPersona"); // Retorna el idPersona
+                return rs.getInt("idPersona"); 
             } else {
-                return -1; // Retorna -1 si no se encuentra la cédula
+                return -1; 
             }
         } catch (SQLException e) {
-            System.out.println("❌ Error al consultar la cédula: " + e.getMessage());
+            System.out.println("Error al consultar la cedula: " + e.getMessage());
             return -1;
         }
     }

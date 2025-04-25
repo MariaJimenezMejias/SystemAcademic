@@ -21,9 +21,9 @@ public class CicloDAO {
             stmt.setInt(5, ciclo.getIdCarrera());
 
             stmt.executeUpdate();
-            System.out.println("✅ Ciclo registrado con éxito.");
+            System.out.println("Ciclo registrado con exito.");
         } catch (SQLException e) {
-            System.out.println("❌ Error al registrar ciclo: " + e.getMessage());
+            System.out.println("Error al registrar ciclo: " + e.getMessage());
         }
     }
 
@@ -46,7 +46,7 @@ public class CicloDAO {
                 ciclos.add(c);
             }
         } catch (SQLException e) {
-            System.out.println("❌ Error al listar ciclos: " + e.getMessage());
+            System.out.println("Error al listar ciclos: " + e.getMessage());
         }
 
         return ciclos;
@@ -72,7 +72,7 @@ public class CicloDAO {
                 c.setIdCarrera(rs.getInt("idCarrera"));
             }
         } catch (SQLException e) {
-            System.out.println("❌ Error al obtener ciclo: " + e.getMessage());
+            System.out.println("Error al obtener ciclo: " + e.getMessage());
         }
 
         return c;
@@ -92,9 +92,9 @@ public class CicloDAO {
             stmt.setInt(6, ciclo.getIdCiclo());
 
             stmt.executeUpdate();
-            System.out.println("✅ Ciclo actualizado correctamente.");
+            System.out.println("Ciclo actualizado correctamente.");
         } catch (SQLException e) {
-            System.out.println("❌ Error al actualizar ciclo: " + e.getMessage());
+            System.out.println("Error al actualizar ciclo: " + e.getMessage());
         }
     }
 
@@ -106,9 +106,9 @@ public class CicloDAO {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            System.out.println("✅ Ciclo eliminado correctamente.");
+            System.out.println("Ciclo eliminado correctamente.");
         } catch (SQLException e) {
-            System.out.println("❌ Error al eliminar ciclo: " + e.getMessage());
+            System.out.println("Error al eliminar ciclo: " + e.getMessage());
         }
     }
 
@@ -138,7 +138,7 @@ public class CicloDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("❌ Error al listar ciclos por carrera: " + e.getMessage());
+            System.out.println("Error al listar ciclos por carrera: " + e.getMessage());
         }
 
         return ciclos;
@@ -165,15 +165,15 @@ public class CicloDAO {
             c.setIdCiclo(rs.getInt("idCiclo"));
             c.setAnio(rs.getInt("anio"));
             String carreraNombre = rs.getString("nombreCarrera");
-            // Aquí se supone que el ciclo tiene un atributo de carrera
-            // Si no, podrías agregar uno o simplemente imprimir el nombre
+            // Aqui se supone que el ciclo tiene un atributo de carrera
+            // Si no, podrias agregar uno o simplemente imprimir el nombre
             System.out.println("Ciclo ID: " + c.getIdCiclo() +
-                    ", Año: " + c.getAnio() +
+                    ", Ano: " + c.getAnio() +
                     ", Carrera: " + carreraNombre);
             ciclos.add(c);
         }
     } catch (SQLException e) {
-        System.out.println("❌ Error al listar ciclos por año: " + e.getMessage());
+        System.out.println("Error al listar ciclos por ano: " + e.getMessage());
     }
 
     return ciclos;

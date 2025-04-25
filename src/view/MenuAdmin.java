@@ -27,8 +27,11 @@ public class MenuAdmin {
             System.out.println("3. Mantenimiento de alumnos");
             System.out.println("4. Mantenimiento de profesores");
             System.out.println("5. Mantenimiento de ciclos");
-            System.out.println("6. Matricula");
-            System.out.println("7. Salir");
+              System.out.println("6. Mantenimiento de grupos");
+              
+            System.out.println("7. Matricula");
+            System.out.println("8. Consultar historial");
+            System.out.println("8. Salir");
 
             System.out.print("Elija una opcion: ");
             int opcion = scanner.nextInt();
@@ -48,10 +51,8 @@ public class MenuAdmin {
 
                 case 3:
                    
-                     menuPersona.mostrarMenu();
-                     usuarioController.registrarUsuario();
-                     AlumnoController alumnoController = new AlumnoController();
-                     alumnoController.registrarAlumnoDesdeConsola();
+                    AlumnoController alumnoController = new AlumnoController();
+                    alumnoController.buscarAlumno();
                    
                     break;
 
@@ -64,14 +65,26 @@ public class MenuAdmin {
                     menuCiclo.menuCiclo();
                             
                     break;
-                    case 6:
+                    case 7:
                       MatriculaController matricula = new MatriculaController();
                       matricula.matricularAlumno();
                     
                     return;
-                    case 7:
+                    
+                      case 8:
+                      menuHistorialAdmin menuHistorialAdmin = new menuHistorialAdmin();
+                      menuHistorialAdmin.mostrarMenu();
+                    return;
+                    
+                    case 9:
                     System.out.println("Saliendo del menu de administracion...");
                     return;
+                    
+                     case 6:
+                     menuGrupo menuGrupo = new menuGrupo();
+                      menuGrupo.menuGrupo();
+                    
+
 
 
                 default:

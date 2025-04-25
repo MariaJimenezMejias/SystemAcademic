@@ -115,8 +115,6 @@ public class CarreraController {
 }
     
 
-
-
     public Carrera buscarCarreraPorNombre(String nombreCarrera) {
         CarreraDAO carreraDAO = new CarreraDAO();
         return carreraDAO.busquedaCarreraPorNombre(nombreCarrera);
@@ -125,7 +123,6 @@ public class CarreraController {
     
 // Cambia el metodo a static
 public  void listarCarreraPorNombre(String nombreCarrera) {
-    // Asegurate de usar el metodo estatico correcto
     Carrera carrera = buscarCarreraPorNombre(nombreCarrera);  // Llamar al metodo estatico de buscarCarreraPorNombre
     if (carrera != null) {
         System.out.println("Carrera encontrada: ");
@@ -139,4 +136,3 @@ public  void listarCarreraPorNombre(String nombreCarrera) {
 
 
 }
-

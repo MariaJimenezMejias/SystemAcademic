@@ -16,11 +16,11 @@ public class menuGrupo {
     public static void menuGrupo() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("\n=== Menú de Grupos ===");
+            System.out.println("\n=== Menu e Grupos ===");
             System.out.println("1. Crear grupo");
             System.out.println("2. Listar grupos");
             System.out.println("3. Volver");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Seleccione una opcion: ");
             int opcion = scanner.nextInt();
             scanner.nextLine();
 
@@ -34,7 +34,7 @@ public class menuGrupo {
                 case 3:
                     return;
                 default:
-                    System.out.println("❌ Opción inválida.");
+                    System.out.println(" Opcion invalida.");
             }
         }
     }

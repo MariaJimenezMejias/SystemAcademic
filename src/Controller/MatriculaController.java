@@ -15,57 +15,55 @@ import DB.dbConnection;
 public class MatriculaController {
     static Scanner scanner = new Scanner(System.in);
 
-public static void matricularAlumno() {
-    while (true) { // Bucle para mantener el menú activo
-        System.out.println("Ingrese la cedula del alumno:");
-        String cedulaAlumno = scanner.nextLine();
-        int idAlumno = alumnoDAO.obtenerIdAlumnoPorCedula(cedulaAlumno);
+    public static void matricularAlumno() {
+        while (true) { // Bucle para mantener el menu activo
+            System.out.println("Ingrese la cedula del alumno:");
+            String cedulaAlumno = scanner.nextLine();
+            int idAlumno = alumnoDAO.obtenerIdAlumnoPorCedula(cedulaAlumno);
 
-        if (idAlumno == -1) {
-            System.out.println("Alumno no encontrado.");
-            return;
-        }
+            if (idAlumno == -1) {
+                System.out.println("Alumno no encontrado.");
+                return;
+            }
 
-        System.out.println("Seleccione una opcion:");
-        System.out.println("1. Matricular al alumno en una carrera.");
-        System.out.println("2. Matricular al alumno en un grupo.");
-        System.out.println("3. Mostrar matriculas activas del estudiante.");
-        System.out.println("4. Salir al menu principal.");
-        System.out.print("Ingrese el numero correspondiente: ");
-        int opcion = scanner.nextInt();
-        scanner.nextLine(); // limpiar buffer
+            System.out.println("Seleccione una opcion:");
+            System.out.println("1. Matricular al alumno en una carrera.");
+            System.out.println("2. Matricular al alumno en un grupo.");
+            System.out.println("3. Mostrar matriculas activas del estudiante.");
+            System.out.println("4. Salir al menu principal.");
+            System.out.print("Ingrese el numero correspondiente: ");
+            int opcion = scanner.nextInt();
+            scanner.nextLine(); // limpiar buffer
 
-        switch (opcion) {
-            case 1:
-                matricularEnCarrera(idAlumno);
-                break;
-            case 2:
-                matricularEnGrupo(idAlumno);
-                break;
-            case 3:
-                mostrarMatriculasActivas(cedulaAlumno);
-                break;
-            case 4:
-                System.out.println("Regresando al menu principal...");
-                if (LoginController.tipoUsuario.equalsIgnoreCase("admin")) {
-                    MenuAdmin menuAdmin = new MenuAdmin();
-                    menuAdmin.menuAdmin();
-                } else if (LoginController.tipoUsuario.equalsIgnoreCase("superadmin")){
-                  MenuAdmin menuAdmin = new MenuAdmin();
-                    menuAdmin.menuAdmin();
-                   System.out.print(LoginController.tipoUsuario);
-                   System.out.println("Estamos pasando aca");
-                }else {
-                
+            switch (opcion) {
+                case 1:
+                    matricularEnCarrera(idAlumno);
+                    break;
+                case 2:
+                    matricularEnGrupo(idAlumno);
+                    break;
+                case 3:
+                    mostrarMatriculasActivas(cedulaAlumno);
+                    break;
+                case 4:
+                    System.out.println("Regresando al menu principal...");
+                    if (LoginController.tipoUsuario.equalsIgnoreCase("admin")) {
+                        MenuAdmin menuAdmin = new MenuAdmin();
+                        menuAdmin.menuAdmin();
+                    } else if (LoginController.tipoUsuario.equalsIgnoreCase("superadmin")){
+                        MenuAdmin menuAdmin = new MenuAdmin();
+                        menuAdmin.menuAdmin();
+                        System.out.print(LoginController.tipoUsuario);
+                        System.out.println("Estamos pasando aca");
+                    } else {
                         matricularAlumno();
-                }
-                return; // Salir del bucle y regresar al menú principal
-            default:
-                System.out.println("Opcion no valida.");
+                    }
+                    return; // Salir del bucle y regresar al menu principal
+                default:
+                    System.out.println("Opcion no valida.");
+            }
         }
     }
-}
-
 
     private static void matricularEnCarrera(int idAlumno) {
         System.out.println("Ingrese el ID de la carrera:");

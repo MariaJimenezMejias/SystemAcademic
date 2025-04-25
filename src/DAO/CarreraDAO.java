@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import Controller.CursoController; // Asegúrate que exista
+import Controller.CursoController; // Asegurate que exista
 
 public class CarreraDAO {
 
@@ -133,7 +133,7 @@ public class CarreraDAO {
 
                 System.out.println("ID: " + idCurso +
                                    ", Nombre: " + nombreCurso +
-                                   ", Créditos: " + creditos +
+                                   ", Creditos: " + creditos +
                                    ", Horas semanales: " + horasSemanales);
 
                 if (nombreCurso != null && !nombreCurso.isEmpty()) {
@@ -185,7 +185,7 @@ public class CarreraDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Error en la búsqueda de carrera por código: " + e.getMessage());
+            System.err.println("Error en la busqueda de carrera por codigo: " + e.getMessage());
         }
 
         return carrera;
@@ -210,7 +210,7 @@ public class CarreraDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Error en la búsqueda de carrera por nombre: " + e.getMessage());
+            System.err.println("Error en la busqueda de carrera por nombre: " + e.getMessage());
         }
 
         return carrera;

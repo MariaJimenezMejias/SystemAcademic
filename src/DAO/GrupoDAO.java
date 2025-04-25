@@ -5,9 +5,6 @@ import model.Grupo;
 import java.sql.*;
 import java.util.ArrayList;
 
-
-
-
 public class GrupoDAO {
 
     public void insertarGrupo(Grupo grupo) {
@@ -24,9 +21,9 @@ public class GrupoDAO {
             pstmt.setInt(6, grupo.getIdCurso());
 
             pstmt.executeUpdate();
-            System.out.println("✅ Grupo insertado correctamente.");
+            System.out.println("Grupo insertado correctamente.");
         } catch (SQLException e) {
-            System.out.println("❌ Error al insertar el grupo: " + e.getMessage());
+            System.out.println("Error al insertar el grupo: " + e.getMessage());
         }
     }
 
@@ -49,7 +46,7 @@ public class GrupoDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("❌ Error al listar grupos: " + e.getMessage());
+            System.out.println("Error al listar grupos: " + e.getMessage());
         }
 
         return lista;

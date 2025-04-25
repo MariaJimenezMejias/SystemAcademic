@@ -4,13 +4,12 @@
  */
 package view;
 import Controller.LoginController;
-
 /**
  *
  * @author maria
  */
 import java.util.Scanner;
-
+import Controller.HistorialAdminController;
 public class MenuAlumno {
 
     private Scanner scanner;
@@ -23,7 +22,7 @@ public class MenuAlumno {
 
     public void mostrarMenuAlumno() {
         boolean continuar = true;
-
+ 
         while (continuar) {
             System.out.println("=== Menu Alumno ===");
             System.out.println("1. Consultar Historial");
@@ -34,8 +33,9 @@ public class MenuAlumno {
 
             switch (opcion) {
                 case 1:
-                    int idAlumno = LoginController.idUsuario;
-                    consultaHistorial.mostrarHistorial(idAlumno);
+                    int idAlumno = LoginController.idRelacionado;
+                  HistorialAdminController historialAdminController = new HistorialAdminController();
+                  historialAdminController.buscarHistorialPorId(idAlumno);
                     break;
 
                 case 2:

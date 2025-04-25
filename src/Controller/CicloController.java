@@ -15,13 +15,13 @@ public class CicloController {
         System.out.println("Ingrese fecha de inicio (YYYY-MM-DD):");
         ciclo.setFechaInicio(scanner.nextLine());
 
-        System.out.println("Ingrese fecha de finalización (YYYY-MM-DD):");
+        System.out.println("Ingrese fecha de finalizacion (YYYY-MM-DD):");
         ciclo.setFechaFinalizacion(scanner.nextLine());
 
-        System.out.println("Ingrese número del ciclo:");
+        System.out.println("Ingrese numero del ciclo:");
         ciclo.setNumero(scanner.nextInt());
 
-        System.out.println("Ingrese año del ciclo:");
+        System.out.println("Ingrese anio del ciclo:");
         ciclo.setAnio(scanner.nextInt());
 
         System.out.println("Ingrese ID de la carrera:");
@@ -36,8 +36,8 @@ public class CicloController {
             System.out.println("ID: " + c.getIdCiclo() +
                     ", Inicio: " + c.getFechaInicio() +
                     ", Fin: " + c.getFechaFinalizacion() +
-                    ", Número: " + c.getNumero() +
-                    ", Año: " + c.getAnio() +
+                    ", Numero: " + c.getNumero() +
+                    ", Anio: " + c.getAnio() +
                     ", ID Carrera: " + c.getIdCarrera());
         });
     }
@@ -52,11 +52,11 @@ public class CicloController {
             System.out.println("ID: " + c.getIdCiclo() +
                     ", Inicio: " + c.getFechaInicio() +
                     ", Fin: " + c.getFechaFinalizacion() +
-                    ", Número: " + c.getNumero() +
-                    ", Año: " + c.getAnio() +
+                    ", Numero: " + c.getNumero() +
+                    ", Anio: " + c.getAnio() +
                     ", ID Carrera: " + c.getIdCarrera());
         } else {
-            System.out.println("❌ Ciclo no encontrado.");
+            System.out.println("Ciclo no encontrado.");
         }
     }
 
@@ -73,13 +73,13 @@ public class CicloController {
         System.out.println("Nueva fecha de inicio (YYYY-MM-DD):");
         ciclo.setFechaInicio(scanner.nextLine());
 
-        System.out.println("Nueva fecha de finalización (YYYY-MM-DD):");
+        System.out.println("Nueva fecha de finalizacion (YYYY-MM-DD):");
         ciclo.setFechaFinalizacion(scanner.nextLine());
 
-        System.out.println("Nuevo número de ciclo:");
+        System.out.println("Nuevo numero de ciclo:");
         ciclo.setNumero(scanner.nextInt());
 
-        System.out.println("Nuevo año del ciclo:");
+        System.out.println("Nuevo anio del ciclo:");
         ciclo.setAnio(scanner.nextInt());
 
         System.out.println("Nuevo ID de carrera:");
@@ -107,22 +107,22 @@ public class CicloController {
             System.out.println("ID: " + c.getIdCiclo() +
                     ", Inicio: " + c.getFechaInicio() +
                     ", Fin: " + c.getFechaFinalizacion() +
-                    ", Número: " + c.getNumero() +
-                    ", Año: " + c.getAnio() +
+                    ", Numero: " + c.getNumero() +
+                    ", Anio: " + c.getAnio() +
                     ", ID Carrera: " + c.getIdCarrera());
         });
     }
-    
-    
+
     public static void listarCiclosPorAnio() {
-    System.out.print("Ingrese el año para filtrar los ciclos: ");
-    int anio = scanner.nextInt();
-    scanner.nextLine();  // Limpiar el buffer
+        System.out.print("Ingrese el anio para filtrar los ciclos: ");
+        int anio = scanner.nextInt();
+        scanner.nextLine();  // Limpiar el buffer
 
-    CicloDAO.listarCiclosPorAnio(anio).forEach(c -> {
-        System.out.println("ID: " + c.getIdCiclo() +
-                ", Año: " + c.getAnio());
-    });
+        CicloDAO.listarCiclosPorAnio(anio).forEach(c -> {
+            System.out.println("ID: " + c.getIdCiclo() +
+                    ", Anio: " + c.getAnio());
+        });
+    }
+
 }
 
-}
