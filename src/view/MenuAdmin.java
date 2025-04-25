@@ -13,6 +13,7 @@ import Controller.MatriculaController;
 import Controller.UsuarioController;
 import Controller.AlumnoController;
 import Controller.ProfesorController;
+import view.menuOfertaAcademica;
 public class MenuAdmin {
 
     public static void menuAdmin() {
@@ -29,6 +30,7 @@ public class MenuAdmin {
             System.out.println("5. Mantenimiento de ciclos");
             System.out.println("6. Matricula");
             System.out.println("7. Salir");
+            System.out.println("8. Ofertas Academicas");
 
             System.out.print("Elija una opcion: ");
             int opcion = scanner.nextInt();
@@ -58,7 +60,8 @@ public class MenuAdmin {
                 case 4:
                     menuProfesor menuProfesor = new menuProfesor();
                     menuProfesor.mostrarMenu();
-                    
+                    break;
+
                 case 5:
                     MenuCiclo menuCiclo = new MenuCiclo();
                     menuCiclo.menuCiclo();
@@ -73,6 +76,9 @@ public class MenuAdmin {
                     System.out.println("Saliendo del menu de administracion...");
                     return;
 
+                case 8:
+                    view.menuOfertaAcademica.mostrarMenu();
+                    break;
 
                 default:
                     System.out.println("Opcion no valida.");
